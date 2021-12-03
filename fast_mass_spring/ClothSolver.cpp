@@ -75,6 +75,7 @@ ClothSolver::ClothSolver(int nn, int cn, float* pos, Constraint* cons, float* ma
 	Eigen::SparseMatrix<float> Q = M + h2 * L;
 	m_cholesky.compute(Q);
 }
+//
 
 void ClothSolver::localSolver()
 {
