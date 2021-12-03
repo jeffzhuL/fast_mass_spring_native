@@ -79,57 +79,6 @@ void Cloth::initStates(float dt)
 	glGenVertexArrays(1, &m_clothVAO);
 	glGenBuffers(1, &m_clothVBO);
 	glGenBuffers(1, &m_clothEBO);
-
-	// we should prefactor some matrices
-	/*m_M.resize(3 * m_totalNodeNum, 3 * m_totalNodeNum);
-	std::vector<Eigen::Triplet<float>> MTriplets;
-	for (int i = 0; i < m_totalNodeNum; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
-			MTriplets.push_back(Eigen::Triplet<float>(3 * i + j, 3 * i + j, m_mass[i]));
-		}
-	}
-	m_M.setFromTriplets(MTriplets.begin(), MTriplets.end());
-
-	m_L.resize(3 * m_totalNodeNum, 3 * m_totalNodeNum);
-	std::vector<Eigen::Triplet<float>> LTriplets;
-	for (int i = 0; i < m_totalConstrainsNum; i++)
-	{
-		Constraint tConstraint = m_constrains[i];
-		int si = tConstraint.m_startIndex;
-		int ei = tConstraint.m_endIndex;
-		float k = tConstraint.m_stiffness;
-
-		for (int j = 0; j < 3; j++)
-		{
-			LTriplets.push_back(Eigen::Triplet<float>(3 * si + j, 3 * si + j, k));
-			LTriplets.push_back(Eigen::Triplet<float>(3 * si + j, 3 * ei + j, -k));
-			LTriplets.push_back(Eigen::Triplet<float>(3 * ei + j, 3 * ei + j, k));
-			LTriplets.push_back(Eigen::Triplet<float>(3 * ei + j, 3 * si + j, -k));
-		}
-	}
-
-	m_J.resize(3 * m_totalNodeNum, 3 * m_totalConstrainsNum);
-	std::vector<Eigen::Triplet<float>> JTriplets;
-	for (int i = 0; i < m_totalConstrainsNum; i++)
-	{
-		Constraint tConstraint = m_constrains[i];
-		int si = tConstraint.m_startIndex;
-		int ei = tConstraint.m_endIndex;
-		float k = tConstraint.m_stiffness;
-
-		for (int j = 0; j < 3; j++)
-		{
-			JTriplets.push_back(Eigen::Triplet<float>(3 * si + j, 3 * i + j, -k));
-			JTriplets.push_back(Eigen::Triplet<float>(3 * ei + j, 3 * i + j, k));
-		}
-	}
-	m_J.setFromTriplets(JTriplets.begin(), JTriplets.end());
-
-	float h2 = dt * dt;
-	Eigen::SparseMatrix<float> Q = m_M + h2 * m_L;
-	m_cholesky.compute(Q);*/
 }
 
 void Cloth::drawCloth(Camera& camera)

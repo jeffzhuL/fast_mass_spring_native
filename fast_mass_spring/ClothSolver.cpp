@@ -76,67 +76,6 @@ ClothSolver::ClothSolver(int nn, int cn, float* pos, Constraint* cons, float* ma
 	m_cholesky.compute(Q);
 }
 
-
-//ClothSolver::ClothSolver(int nn, int cn, float* pos, Constraint* cons, float* mass) :
-//	m_nodeNum(nn),
-//	m_constraintNum(cn),
-//	currStates(std::vector<float>(pos, pos + nn * 3)),
-//	m_constrains(cons),
-//	m_mass(mass),
-//	d(cn * 3),
-//	y(nn * 3),
-//	b(nn * 3),
-//	M(nn * 3, nn * 3),
-//	J(nn * 3, cn * 3),
-//	L(nn * 3, nn * 3)
-//{
-//	prevStates = currStates;
-//
-//	// L
-//	for (int i = 0; i < m_constraintNum; i++)
-//	{
-//		Constraint tConstraint = m_constrains[i];
-//		int si = tConstraint.m_startIndex;
-//		int ei = tConstraint.m_endIndex;
-//		float k = tConstraint.m_stiffness;
-//
-//		for (int j = 0; j < 3; j++)
-//		{
-//			L(3 * si + j, 3 * si + j) = k;
-//			L(3 * si + j, 3 * ei + j) = -k;
-//			L(3 * ei + j, 3 * ei + j) = k;
-//			L(3 * ei + j, 3 * si + j) = -k;
-//		}
-//	}
-//
-//	// M
-//	for (int i = 0; i < m_nodeNum; i++)
-//	{
-//		for (int j = 0; j < 3; j++)
-//		{
-//			M(3 * i + j, 3 * i + j) = m_mass[i];
-//		}
-//	}
-//
-//	// J
-//	for (int i = 0; i < m_constraintNum; i++)
-//	{
-//		Constraint tConstraint = m_constrains[i];
-//		int si = tConstraint.m_startIndex;
-//		int ei = tConstraint.m_endIndex;
-//		float k = tConstraint.m_stiffness;
-//
-//		for (int j = 0; j < 3; j++)
-//		{
-//			J(3 * si + j, 3 * i + j) = -k;
-//			J(3 * ei + j, 3 * i + j) = k;
-//		}
-//	}
-//
-//	float h2 = (DELTA_TIME) * (DELTA_TIME);
-//	Q = M + h2 * L;
-//}
-
 void ClothSolver::localSolver()
 {
 	for (int i = 0; i < m_constraintNum; i++)
